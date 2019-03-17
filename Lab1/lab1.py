@@ -1,5 +1,6 @@
 import math
 def function(x, z):
+	""" Counts ((x + 2x +3)/(z-2)) + arctg(z) """
     if z == 2:
         print("Введённое значение Z не принадлежит к ОДЗ.")
         print("Z должно быть не равно 2.")
