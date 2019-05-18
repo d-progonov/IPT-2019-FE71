@@ -1,0 +1,6 @@
+The pair of these elements from prime number list give our value in sum:41+3
+The pair of these elements from prime number list give our value in sum:37+7
+The pair of these elements from prime number list give our value in sum:31+13
+The pair of these elements from prime number list give our value in sum:13+31
+The pair of these elements from prime number list give our value in sum:7+37
+The pair of these elements from prime number list give our value in sum:3+41
