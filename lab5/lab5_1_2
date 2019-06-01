@@ -1,0 +1,121 @@
+from math import isnan, isinf
+
+def funcP(x, A):
+    res = 0
+    if x == 0:
+        return 0
+    for i in range(len(A)-1, -1, -1):
+        res += A[i] * (x**(i+1))
+    return res
+
+def getRes(s, t, A):
+    return funcP(1, A) - funcP(t, A) + (funcP(s - t, A)) ** 2 - (funcP(1, A)) ** 3
+
+
+if __name__ == "__main__":
+    n = 13 #Количество елементов a0...a12
+    while True:
+        try:
+            f_S = float(input("S = "))
+        except ValueError:
+            print("Вы ввели не число.")
+            continue
+        if isinf(f_S):
+            print("Невозможно выполнить дейсвтие с бесконечностью.")
+            continue
+        elif isnan(f_S):
+            print("Невозможно выполнить действие с не числом (NaN)")
+            continue
+        else:
+            break
+
+    while True:
+        try:
+            f_T = float(input("T = "))
+        except ValueError:
+            print("Вы ввели не число.")
+            continue
+        if isinf(f_T):
+            print("Невозможно выполнить дейсвтие с бесконечностью.")
+            continue
+        elif isnan(f_T):
+            print("Невозможно выполнить действие с не числом (NaN)")
+            continue
+        else:
+            break
+
+    A = [0] * n
+
+    for i in range(n):
+        while True:
+            try:
+                A[i] = float(input("A{0} = ".format(i)))
+            except ValueError:
+                print("Вы ввели не число.")
+                continue
+            if isinf(A[i]):
+                print("Невозможно выполнить дейсвтие с бесконечностью.")
+                continue
+            elif isnan(A[i]):
+                print("Невозможно выполнить действие с не числом (NaN)")
+                continue
+            else:
+                break
+
+    print("Результат = " + str(getRes(f_S, f_T, A)))
+
+
+
+
+def func(n, a, c):
+    if n >= 0 and n <= 9:
+        return n
+    else:
+        g = a*(n+c)%10
+        return g * func(n - 1 - g, a, c) + n
+
+
+if __name__ == "__main__":
+    while True:
+        try:
+            i_N = int(input("Введите натуральное число n: "))
+        except ValueError:
+            print("Вы ввели не число, или не целое число.")
+            continue
+        # 0 - не натуральное число
+        if i_N <= 0:
+            print("Вы ввели не натуральное число.")
+            continue
+        else:
+            break
+
+    while True:
+        try:
+            i_A = int(input("Введите натуральное число a: "))
+        except ValueError:
+            print("Вы ввели не число, или не целое число.")
+            continue
+        # 0 - не натуральное число
+        if i_A <= 0:
+            print("Вы ввели не натуральное число.")
+            continue
+        else:
+            break
+
+    while True:
+        try:
+            i_C = int(input("Введите натуральное число c: "))
+        except ValueError:
+            print("Вы ввели не число, или не целое число.")
+            continue
+        # 0 - не натуральное число
+        if i_C <= 0:
+            print("Вы ввели не натуральное число.")
+            continue
+        else:
+            break
+
+    try:
+        print("Результат: {0}".format(func(i_N, i_A, i_C)))
+    except RecursionError:
+        print("Недостаточно ресурсов для такой глубины рекурсии.")
