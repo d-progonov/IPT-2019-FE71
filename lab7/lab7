@@ -1,0 +1,84 @@
+import numpy as np
+from math import isinf, isnan
+
+if __name__ == "__main__":
+    print("Введите размерность матрицы.")
+
+    while True:
+        try:
+            rowNum = float(input("Количество строк -> "))
+        except ValueError:
+            print("Скорее всего вы ввели или не целое число, или не число вообще.")
+            continue
+        if isinf(rowNum):
+            print("Количество не может быть бесконечностью.")
+            continue
+        elif isnan(rowNum):
+            print("Количество не может быть не числом.")
+            continue
+        elif not rowNum.is_integer():
+            print("Вы ввели не целое число.")
+            continue
+        else:
+            rowNum = int(rowNum)
+
+        if rowNum <= 0:
+            print("Размерность не может быть отрицательной или 0.")
+            continue
+        else:
+            break
+
+    while True:
+        try:
+            colNum = float(input("Количество столбиков -> "))
+        except ValueError:
+            print("Скорее всего вы ввели или не целое число, или не число вообще.")
+            continue
+        if isinf(colNum):
+            print("Количество не может быть бесконечностью.")
+            continue
+        elif isnan(colNum):
+            print("Количество не может быть не числом.")
+            continue
+        elif not colNum.is_integer():
+            print("Вы ввели не целое число.")
+            continue
+        else:
+            colNum = int(colNum)
+        if colNum <= 0:
+            print("Размерность не может быть отрицательной или 0.")
+            continue
+        else:
+            break
+
+    matrix = [[0] * colNum for i in range(rowNum)]
+
+    print("Теперь введите значения для матрицы: ")
+    for i in range(rowNum):
+        for j in range(colNum):
+            matrix[i][j] = input("M[{0}][{1}] = ".format(i, j))
+
+    print("Введённая матрица: ")
+    for row in matrix:
+        print(" ".join(str(elem) for elem in row))
+
+    print("Матрица, полученная после транспонирования: ")
+    #Транспонирование матрицы.
+
+    matrixTr = np.transpose(matrix)
+
+    for row in matrixTr:
+        print(" ".join(str(elem) for elem in row))
+
+    rowsTr, colsTr = colNum, rowNum
+
+    upperDiagonal = np.triu(matrixTr)
+    s_UpperDiagonal = [""] * rowsTr
+    for i in range(rowsTr):
+        buffer = ""
+        for j in range(colsTr):
+            buffer += upperDiagonal[i][j]
+        s_UpperDiagonal[i] = buffer
+
+    for i in range(rowsTr):
+        print("Стринг {0} = '{1}'".format(i, s_UpperDiagonal[i]))
