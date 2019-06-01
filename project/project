@@ -1,0 +1,57 @@
+from math import isnan, isinf
+
+def ten_to_fi(n):
+    n = int(n)
+    f0, f1 = 0, 1
+    resnum = [] # в этот список заносятся номера чисел ф. из которых состоит данное число
+    num = -1
+    finres = '' # это строка окончательного результата
+    while n != 0:
+        while f1 <= n: # перебираем числа ф. пока не найдем число большее данного
+            f0, f1 = f1, f0 + f1
+            num += 1
+            if f1 > n:              # если текущее число ф. больше данного
+                n -= f0             # вычитаем его из данного
+                resnum.append(num)  # и добавляем его номер в список, при этом
+                f0, f1 = 0, 1       # сбрасываем числа ф. и
+                num = -1            # счетчик их номера
+
+    i = resnum[0]   # у нас есть список с номерами чисел ф. образующих данное число.
+    while i > 0:    # следует его обработать и представить в виде числа в ф. сс
+        k = 0
+        check = False
+        while k < len(resnum):
+            if i == resnum[k]:
+                finres += '1'
+                check = True
+            k += 1
+        if check == False:
+            finres += '0'
+        i -= 1
+
+    return finres
+
+
+if __name__ == '__main__':
+    try:
+        dec_num = float(input("Enter your number: "))
+    except ValueError:
+        print("You had not entered a number")
+        exit()
+    if isnan(dec_num):
+        print("Unable to work with not a number (nan)")
+        exit()
+    elif isinf(dec_num):
+        print("Unable to work with Endless")
+        exit()
+    elif not dec_num.is_integer():
+        print("You should enter an integer")
+        exit()
+    else:
+        dec_num = abs(int(dec_num))
+
+    if dec_num <= 0:
+        print("Unable to work with number which is <= 0.")
+        exit()
+
+    print("Your number in the Fibonacci's system is: {0}".format(ten_to_fi(dec_num)))
