@@ -1,0 +1,16 @@
+import math
+while True:
+    try:
+        A = input("ENTER YOUR NUMBER: ")
+        a = float(A)
+        if math.isnan(a):
+            print("UNABLE TO PERFORM OPERATION WITH NOT A NUMBER(NaN). ENTER YOUR NUMBER: ")
+            continue
+        break
+    except ValueError:
+        print("Value error!")
+if a < 0 :
+    y = math.fabs(a)
+    print(y)
+else:
+    print(a)
