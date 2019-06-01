@@ -1,0 +1,134 @@
+import check
+from count import getRes
+
+if __name__ == "__main__":
+    try:
+        file = open('input.txt', 'r') #Открыть файл на чтение.
+    except FileNotFoundError:
+        print("Файл не найден. Проверьте, находится ли файл в одной директории с программой.")
+        exit()
+    inp = [line.strip() for line in file]
+    file.close()
+    n = 13 #A0...A12
+    A = [0] * n
+    if len(inp) < n + 2:
+        print("Недостаточно данных в файле. (Должно быть 15 чисел: S, T, A0...A12. Каждое число с новой строки.)")
+        exit()
+    else:
+        print("Полученные значения: ")
+        try:
+            f_S = float(inp[0])
+        except ValueError:
+            print("Скорее всего вы ввели не число.")
+            print("1 число в файле равно {0}. Такое значение недопустимо.".format(inp[0]))
+            exit()
+        if not check.checkNumber(f_S):
+            print("Недопустимое значение: " + str(inp[0]))
+            exit()
+        else:
+            print("S = " + str(f_S))
+
+        try:
+            f_T = float(inp[1])
+        except ValueError:
+            print("Скорее всего вы ввели не число.")
+            print("2 число в файле равно {0}. Такое значение недопустимо.".format(inp[1]))
+            exit()
+        if not check.checkNumber(f_T):
+            print("Недопустимое значение: " + str(inp[1]))
+            exit()
+        else:
+            print("T = " + str(f_T))
+
+        for i in range(n):
+            try:
+                A[i] = float(inp[i+2])
+            except ValueError:
+                print("Скорее всего вы ввели не число.")
+                print("{0} число в файле равно {1}. Такое значение недопустимо.".format(i+2, inp[i+2]))
+                exit()
+            if not check.checkNumber(A[i]):
+                print("Недопустимое значение: " + str(inp[i+2]))
+                exit()
+            else:
+                print("A{0} = ".format(i) + str(A[i]))
+        out = open('out.txt', 'w')
+        out.write("Результат = " + str(getRes(f_S, f_T, A)))
+        out.close()
+
+        print("Результаты записанны в файл 'out.txt'.")
+        
+        
+        
+        
+        from check import checkNumber
+import getRes
+if __name__ == "__main__":
+
+    filename = 'input.txt' #name of file
+    error1 = 'badData_1.txt' #to test error
+    error2 = 'badData_2.txt'  # to test error
+    error3 = 'smallData.txt'  # to test error
+
+    try:
+        inp = open(filename, 'r') #open file
+    except FileNotFoundError: #if file doesn't exist
+        print("Файл {0} не найден.".format(filename))
+        exit()
+    data = [line.strip() for line in inp] #get data
+    inp.close() #close file
+
+    if len(data) < 3:
+        print("Недостаточно данных. В файле должны быть записаны 3 числа. Каждое с новой строки.")
+        exit()
+    else:
+        print("Полученные данные:")
+
+        #get N
+        try:
+            i_N = int(data[0])
+        except ValueError:
+            print("Скорее всего вы ввели не число.")
+            print("{0} - недопустимое  значение.".format(data[0]))
+            exit()
+        if not checkNumber(i_N):
+            print("{0} - недопустимое  значение.".format(i_N))
+            exit()
+        else:
+            print("N = {0}".format(i_N))
+
+        #get A
+        try:
+            i_A = int(data[1])
+        except ValueError:
+            print("Скорее всего вы ввели не число.")
+            print("{0} - недопустимое  значение.".format(data[1]))
+            exit()
+        if not checkNumber(i_A):
+            print("{0} - недопустимое  значение.".format(i_A))
+            exit()
+        else:
+            print("A = {0}".format(i_A))
+
+         #get C
+        try:
+            i_C = int(data[2])
+        except ValueError:
+            print("Скорее всего вы ввели не число.")
+            print("{0} - недопустимое  значение.".format(data[2]))
+            exit()
+        if not checkNumber(i_C):
+            print("{0} - недопустимое  значение.".format(i_C))
+            exit()
+        else:
+            print("C = {0}".format(i_C))
+
+        output = open('out.txt', 'w') #Open or create output file
+        #Get result and try to write into output file
+        try:
+            output.write("Результат: {0}".format(getRes.func(i_N, i_A, i_C)))
+        except RecursionError:
+            print("Недостаточно ресурсов для такой глубины рекурсии.")
+            exit()
+        print("Результаты успешно записанны в файл 'out.txt'.")
+        output.close() #Close output file
