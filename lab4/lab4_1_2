@@ -1,0 +1,124 @@
+from math import factorial
+
+if __name__ == "__main__":
+
+    #get matrix size
+    while True:
+        inpOrder = input("Введите порядок матрицы (натуральное число): ")
+        try:
+            order = int(inpOrder)
+        except ValueError:
+            print("Похоже, вы ввели не число. Попытайтесь ещё раз.")
+            continue
+
+        if order == 0:
+            print("НОЛЬ - это не натуральное число.")
+            continue
+        elif order < 0:
+            print("Отрицательное число - это НЕ натуральное число.")
+            continue
+        break
+
+    #Fill matrix orderXorder with 0-s
+    matrix = [[0] * order for i in range(order)]
+
+    #Fill matrix
+    for i in range(order):
+        for j in range(order):
+            matrix[i][j] = (1/factorial(j+1))**(i+1)
+
+    #print resulting matrix
+    print("Результат: ")
+    for row in matrix:
+        print(' '.join([str(elem) for elem in row
+        
+        
+        def print2Left(lst):
+    while True:
+        try:
+            i_K = int(input("Введите индекс елемента, с которого нужно распечатать массив (нумерация начинается с 0): "))
+        except ValueError:
+            print("Вы ввели не число, или не целое число. ")
+            continue
+        if i_K < 0:
+            print("Индекс не может быть отрицательным.")
+            continue
+        else:
+            break
+    if i_K == 0:
+        print(str(lst[i_K]) + " " + str(lst[len(lst)-1]))
+    else:
+        print(str(lst[i_K]) + " " + str(lst[i_K-1]))
+
+
+def print2Right(lst):
+    while True:
+        try:
+            i_K = int(input("Введите индекс елемента, с которого нужно распечатать массив (нумерация начинается с 0): "))
+        except ValueError:
+            print("Вы ввели не число, или не целое число. ")
+            continue
+        if i_K < 0:
+            print("Индекс не может быть отрицательным.")
+            continue
+        else:
+            break
+    if i_K == len(lst) - 1:
+        print(str(lst[i_K]) + " " + str(lst[0]))
+    else:
+        print(str(lst[i_K]) + " " + str(lst[i_K+1]))
+
+
+def paste(lst):
+    plusSize = int(len(lst)/5)
+    newLst = [0]*(len(lst) + plusSize)
+    j = 0
+    for i in range(len(lst)):
+        if i % 5 != 0 or i == 0:
+            newLst[j] = lst[i]
+            j+=1
+        else:
+            newLst[j] = 0
+            j+=1
+            newLst[j] = lst[i]
+            j+=1
+    return newLst
+
+if __name__ == "__main__":
+    while True:
+        inpElemNum = input("Введите количество елементов в списке: ")
+        try:
+            i_ElNum = int(inpElemNum)
+        except ValueError:
+            print("Скорее всего вы ввели не число, или не целое число.")
+            continue
+        if i_ElNum < 0:
+            print("Количество не может быть отрицательным.")
+            continue
+        elif i_ElNum == 0:
+            print("Не имеет смысла создавать массив с количеством елементов 0.")
+            continue
+        else:
+            circle = [0] * i_ElNum
+            break
+
+    print("Теперь введите елементы данного массива: ")
+    for i in range(i_ElNum):
+        circle[i] = input("{0} ел-т: ".format(i+1))
+
+    print("Введённый массив: ")
+    for elem in circle:
+        print(str(elem))
+
+    print("Распечатывание массива от К-го ел-та до К-1 - го (влево по кольцу).")
+    print2Left(circle)
+
+    print("Вставка нулей после каждого эл-та с индексом 5.")
+    circle = paste(circle)
+
+    print("Получившийся массив: ")
+    for elem in circle:
+        print(str(elem))
+
+    print("Распечатывание массива от К-го ел-та до К+1 - го (вправо по кольцу).")
+    print2Right(circle)
