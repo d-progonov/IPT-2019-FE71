@@ -1,0 +1,68 @@
+import math
+def f(n):
+    return (1/(2**n)+1/(3**n))
+
+e = 0.0001
+seqSum = 0.0
+n = 1
+while f(n) >= e:
+    seqSum += f(n)
+    print("{0} element your sequence: {1}".format(n, f(n)))
+    print("Sum sequence accuracy 0.0001: {0}".format(seqSum))
+    n += 1
+print("Sum sequence accuracy 0.0001: {0}".format(seqSum))
+
+
+
+import math
+def f(n):
+    return (1/(2**n)+1/(3**n))
+e = 0.0001
+seqSum = 0.0
+n = 1
+while True:
+    if (f(n) >= e):
+        seqSum += f(n)
+        print("{0} element your sequence: {1}".format(n, f(n)))
+        n += 1
+    else:
+        break
+print("Sum sequence accuracy 0.0001: {0}".format(seqSum))
+
+
+
+from math import sqrt
+
+RANGE_PRIME_NUMBERS = 50
+
+def prime_number(): #простые числа
+    generated_number = [2]
+    for p in range(3, RANGE_PRIME_NUMBERS+1, 2):
+        if p > 10 and p % 10 == 5:
+            continue
+        for k in generated_number:
+            if k > int((sqrt(p))+1):
+                generated_number.append(p)
+                break
+            if p % k == 0:
+                break
+        else:
+            generated_number.append(p)
+    return generated_number
+
+
+if __name__ == '__main__':
+    numbers = []
+    while True:
+        try:
+            n = int(input('ENTERED YOUR N: '))
+            break
+        except ValueError:
+            print("Value error!")
+    for p in prime_number():
+        temp = 2 ** p - 1
+        if temp < n:
+            numbers.append(temp)
+        else:
+            break
+print(numbers)
