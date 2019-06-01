@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+if __name__ == "__main__":
+    x = np.arange(-2, 1.5, 0.01)  # В принципе, требуется только x от -2 до 1.5
+    #{log1/3(2x+y-2)>log1/3(y+1)} => {2x+y-2<y+1; 2x+y-2>0} => {2x-3<0; y>2-2x}
+    #{sqrt(y-2x-3)<sqrt(3-2x)} => {y-2x-3 < 3-2x; y-2x-3>0} => {y < 6, y > 2x+3}
+    y1 = 2-2*x
+    y2 = 2 * x + 3
+    y3 = 6
+
+    y4 = np.maximum(y1, y2)
+
+    fig, ax = plt.subplots()
+
+    plt.ylim(0, 7)
+
+    # Построение линий
+    ax.plot(x, y1, 'r',
+            x, y2, 'g',
+            linestyle='--')
+
+    # Горизонтальная линия: y==6
+    plt.axhline(y3, linestyle='--', color='blue')
+
+    # Заполнение между y3 и y4.
+    ax.fill_between(x, y3, y4, where=y4<y3, color='blue', alpha=0.5)
+
+    plt.grid()
+    plt.show()
